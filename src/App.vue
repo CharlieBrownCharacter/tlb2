@@ -8,6 +8,14 @@
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" app fixed>
       <v-list two-line>
+      <v-list-tile :to="{name: 'home'}">
+        <v-list-tile-action>
+          <v-icon>home</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Home</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
         <v-list-tile :to="{name: 'servers'}">
           <v-list-tile-action>
             <v-icon>computer</v-icon>
@@ -69,7 +77,6 @@
 				this.$toasted.show('Adicionada com sucesso')
       }
     },
-    created(){
-		}
+    created(){}
   }
 </script>

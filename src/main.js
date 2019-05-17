@@ -8,11 +8,8 @@ import Toasted from 'vue-toasted';
 
 
 axios.defaults.baseURL = 'http://localhost:8080/';
-axios.defaults.headers.common['Content-Type'] = "text/plain";
-axios.defaults.headers.common['Accept'] = "text/plain";
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
-axios.defaults.headers.common['Access-Control-Allow-Credentials'] = "true";
-axios.defaults.headers.common['Access-Control-Allow-Headers'] = "application/json";
+axios.defaults.headers['Accept'] = "application/json";
+axios.defaults.headers['Content-Type'] = "application/json";
 
 Vue.config.productionTip = false
 

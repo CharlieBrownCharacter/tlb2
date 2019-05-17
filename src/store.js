@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import AuthAPI from "./packages/API/auth"
-
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
 			state.user = payload
 		},
 		SET_TOKEN: (state, token) => {
+			axios.defaults.headers['X-Auth-Token'] = token;
 			state.token = token
 		}
 	},
