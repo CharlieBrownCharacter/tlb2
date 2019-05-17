@@ -1,13 +1,11 @@
 <template>
   <section>
-    Whatup
+    VIEW SERVERS
   </section>
 </template>
 
 <script>
-
   export default {
-    components: {
-    }
+
   }
 </script>

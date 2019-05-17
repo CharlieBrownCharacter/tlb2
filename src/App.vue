@@ -1,31 +1,49 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>LTI STACK</span>
+      </v-toolbar-title>
+    </v-toolbar>
+    <v-navigation-drawer v-model="drawer" app fixed>
+      <v-list two-line>
+        <v-list-tile @click="login">
+          <v-list-tile-content class="text-xs-center">
+            LET ME IN
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile :to="{name: 'servers'}">
+          <v-list-tile-action>
+            <v-icon>computer</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Servers</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-content>
+      <router-view/>
+    </v-content>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+  import AuthAPI from './packages/API/auth'
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  export default {
+    name: 'App',
+    data () {
+      return {
+        drawer: true
+      }
+    },
+    methods: {
+      login(){
+        AuthAPI.letmein().then(r => {
+					localStorage.setItem('user', JSON.stringify(r.data))
+				});
+      }
+    }
+  }
+</script>
