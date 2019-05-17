@@ -7,11 +7,21 @@
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" app fixed>
       <v-list two-line>
-        <v-list-tile @click="login">
-          <v-list-tile-content class="text-xs-center">
-            LET ME IN
-          </v-list-tile-content>
-        </v-list-tile>
+        <template v-if="localStorage.getItem('user') === null">
+          <v-list-tile @click="login">
+            <v-list-tile-content class="text-xs-center">
+              LET ME IN
+            </v-list-tile-content>
+          </v-list-tile>
+        </template>
+        <template v-else>
+          <v-list-tile @click="logout">
+            <v-list-tile-content class="text-xs-center">
+              Logout
+            </v-list-tile-content>
+          </v-list-tile>
+        </template>
+
         <v-list-tile :to="{name: 'servers'}">
           <v-list-tile-action>
             <v-icon>computer</v-icon>
@@ -43,7 +53,12 @@
         AuthAPI.letmein().then(r => {
 					localStorage.setItem('user', JSON.stringify(r.data))
 				});
+      },
+      logout(){
+				localStorage.setItem('user', null)
       }
-    }
+    },
+    created(){
+		}
   }
 </script>
