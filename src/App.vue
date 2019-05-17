@@ -3,25 +3,11 @@
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>LTI STACK</span>
+        <v-spacer></v-spacer>
       </v-toolbar-title>
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" app fixed>
       <v-list two-line>
-        <template v-if="localStorage.getItem('user') === null">
-          <v-list-tile @click="login">
-            <v-list-tile-content class="text-xs-center">
-              LET ME IN
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-        <template v-else>
-          <v-list-tile @click="logout">
-            <v-list-tile-content class="text-xs-center">
-              Logout
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-
         <v-list-tile :to="{name: 'servers'}">
           <v-list-tile-action>
             <v-icon>computer</v-icon>
@@ -33,29 +19,54 @@
       </v-list>
     </v-navigation-drawer>
     <v-content>
+      <v-container grid-list-md>
+        <v-layout row>
+          <v-flex xs10>
+            <v-text-field
+                solo
+                v-model="token"
+                label="Token"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs2>
+            <v-btn
+              block
+              @click="SET_TOKEN_METHOD(token)"
+              style="height: 47px; margin-top: 0px"
+            >
+              SET TOKEN
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-container>
       <router-view/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-  import AuthAPI from './packages/API/auth'
+	import {mapGetters, mapMutations} from "vuex"
 
   export default {
     name: 'App',
     data () {
       return {
-        drawer: true
+        drawer: true,
+        token: ''
       }
     },
+    computed: {
+    	...mapGetters({
+        GET_TOKEN: 'GET_TOKEN'
+      })
+    },
     methods: {
-      login(){
-        AuthAPI.letmein().then(r => {
-					localStorage.setItem('user', JSON.stringify(r.data))
-				});
-      },
-      logout(){
-				localStorage.setItem('user', null)
+      ...mapMutations({
+				SET_TOKEN: 'SET_TOKEN'
+      }),
+			SET_TOKEN_METHOD(){
+      	this.SET_TOKEN(this.token);
+				this.$toasted.show('Adicionada com sucesso')
       }
     },
     created(){

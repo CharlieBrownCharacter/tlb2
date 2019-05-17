@@ -1,6 +1,6 @@
 <template>
   <section>
-    VIEW SERVERS
+    {{ $store.getters.GET_TOKEN }}
   </section>
 </template>
 
