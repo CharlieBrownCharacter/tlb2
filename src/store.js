@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
 	state: {
 		user: null,
-		token: ''
+		token: null
 	},
 	getters: {
 		GET_USER: state => {

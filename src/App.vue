@@ -8,14 +8,15 @@
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" app fixed>
       <v-list two-line>
-      <v-list-tile :to="{name: 'home'}">
-        <v-list-tile-action>
-          <v-icon>home</v-icon>
-        </v-list-tile-action>
+        <v-list-tile :to="{name: 'home'}">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>Home</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <template v-if="GET_TOKEN !== null">
         <v-list-tile :to="{name: 'servers'}">
           <v-list-tile-action>
             <v-icon>computer</v-icon>
@@ -24,6 +25,15 @@
             <v-list-tile-title>Servers</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile :to="{name: 'flavors'}">
+          <v-list-tile-action>
+            <v-icon>fastfood</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Flavors</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
       </v-list>
     </v-navigation-drawer>
     <v-content>
@@ -80,3 +90,12 @@
     created(){}
   }
 </script>
+
+<style>
+  pre {
+    background-color: white;
+    color: black;
+    display: block;
+    border-radius: 10px;
+  }
+</style>
