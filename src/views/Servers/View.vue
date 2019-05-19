@@ -5,14 +5,13 @@
           hide-actions
           :headers="headers"
           :items="servers"
+          :loading="loaders.action"
           class="elevation-1"
       >
         <template v-slot:items="props">
           <td>{{ props.item.name }}</td>
           <td>
-            <v-icon>
-              {{ props.item.status === 'SHUTOFF' ? 'close' : 'check' }}
-            </v-icon>
+            {{ props.item.status }}
           </td>
           <td>{{ $moment(props.item.created).format('D/M/YYYY HH:mm') }}</td>
           <td>
@@ -29,6 +28,11 @@
               <v-list>
                 <v-list-tile @click="$router.push({name: 'servers-only', params: {id: props.item.id}})">
                   <v-list-tile-title>Mais detalhes</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+              <v-list>
+                <v-list-tile @click="DELETE_SERVER(props.item.id)">
+                  <v-list-tile-title>Apagar Servidor</v-list-tile-title>
                 </v-list-tile>
               </v-list>
             </v-menu>
@@ -49,12 +53,15 @@
   		return {
 				headers: [
 					{ text: 'Nome', sortable: true, value: 'name' },
-					{ text: 'Ligado', value: 'status' },
+					{ text: 'Estado', value: 'status' },
 					{ text: 'Data criação', value: 'created' },
 					{ text: '', value: '' },
 				],
 				servers: [],
-        timer: null
+        timer: null,
+        loaders: {
+					action: false
+        }
       }
     },
   	methods: {
@@ -64,10 +71,24 @@
           return
         }
 
+				this.loaders.action = true;
+
 				SERVERS.GET_SERVERS_DETAILS().then(r => {
 					this.servers = r.data.servers;
+				}).finally(() => {
+					this.loaders.action = false;
 				})
       },
+			DELETE_SERVER(SERVER_ID){
+				if(!confirm('Tem a certeza que gostaria de apagar este server?')) return
+
+				this.loaders.action = true;
+				SERVERS.DELETE_SERVER(SERVER_ID).then(r => {
+
+        }).finally(() => {
+        	this.loaders.action = false;
+        })
+      }
     },
     computed: {
 			...mapGetters({
@@ -79,7 +100,8 @@
     },
     created() {
 			this.GET_SERVERS_DETAILS()
-			this.timer = setInterval(this.GET_SERVERS_DETAILS, 4000)
-		}
+			// this.timer = setInterval(this.GET_SERVERS_DETAILS, 4000)
+
+  	}
 	}
 </script>

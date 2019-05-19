@@ -120,7 +120,7 @@
           adding: false
         },
         dialogs: {
-					createFlavor: true
+					createFlavor: false
         },
       }
     },

@@ -18,5 +18,11 @@ export default {
 			method: 'GET',
 			url: 'compute/v2.1/servers/' + SERVER_ID,
 		})
+	},
+	DELETE_SERVER(SERVER_ID){
+		return axios({
+			method: 'DELETE',
+			url: 'compute/v2.1/servers/' + SERVER_ID,
+		})
 	}
 }
