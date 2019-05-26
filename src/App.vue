@@ -33,6 +33,14 @@
             <v-list-tile-title>Flavors</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile :to="{name: 'images'}">
+          <v-list-tile-action>
+            <v-icon>portrait</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Images</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </template>
       </v-list>
     </v-navigation-drawer>
