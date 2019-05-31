@@ -24,5 +24,12 @@ export default {
 			method: 'DELETE',
 			url: 'compute/v2.1/servers/' + SERVER_ID,
 		})
+	},
+	ADD_SERVER(DATA){
+		return axios({
+			method: 'POST',
+			url: 'compute/v2.1/servers',
+			data: DATA
+		})
 	}
 }
