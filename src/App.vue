@@ -41,6 +41,14 @@
             <v-list-tile-title>Images</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile :to="{name: 'volumes'}">
+          <v-list-tile-action>
+            <v-icon>view_agenda</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Volumes</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </template>
       </v-list>
     </v-navigation-drawer>
@@ -82,7 +90,7 @@
       }
     },
     computed: {
-    	...mapGetters({
+      ...mapGetters({
         GET_TOKEN: 'GET_TOKEN'
       })
     },
@@ -91,7 +99,7 @@
 				SET_TOKEN: 'SET_TOKEN'
       }),
 			SET_TOKEN_METHOD(){
-      	this.SET_TOKEN(this.token);
+        this.SET_TOKEN(this.token);
 				this.$toasted.show('Adicionada com sucesso')
       }
     },

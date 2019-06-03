@@ -88,8 +88,8 @@
 	import {mapGetters} from "vuex"
 
 	export default {
-  	data(){
-  		return {
+    data(){
+      return {
 				headers: [
 					{ text: 'Nome', sortable: true, value: 'name' },
 					{ text: 'Estado', value: 'status' },
@@ -142,7 +142,7 @@
         }
       }
     },
-  	methods: {
+    methods: {
 			GET_IMAGES(){
 				if(this.GET_TOKEN === null){
 					this.$toasted.error('Deve inserir a token antes de realizar o pedido')
@@ -168,11 +168,8 @@
           this.dialogs.newImage=false;
           this.loaders.action = true;
 
-          console.log(this.image);
           IMAGES.POST_IMAGE(this.image).then(r => {
-
             IMAGES.PUT_IMAGE(r.data.id, this.file);
-            
           }).finally(() => {
             this.loaders.action = false;
             this.GET_IMAGES(); 
@@ -185,7 +182,7 @@
 				this.loaders.action = true;
 				IMAGES.DELETE_IMAGE(IMAGE_ID).then(r => {
         }).finally(() => {
-        	this.loaders.action = false;
+          this.loaders.action = false;
           this.GET_IMAGES();
         })
       }
@@ -196,12 +193,11 @@
 			})
     },
     destroyed(){
-  	  clearInterval(this.timer)
+      clearInterval(this.timer)
     },
     created() {
 			this.GET_IMAGES()
 			// this.timer = setInterval(this.GET_SERVERS_DETAILS, 4000)
-
-  	}
+    }
 	}
 </script>
