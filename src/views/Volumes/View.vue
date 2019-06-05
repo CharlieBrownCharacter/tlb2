@@ -168,7 +168,7 @@
 
         axios({
           method: 'GET',
-          url: 'identity/v3/projects',
+          url: 'http://localhost:8080/identity/v3/projects',
           }).then(r => {
             let projeto = r.data.projects.find(m => m.name === 'alt_demo');
             this.project_id = projeto.id;
@@ -188,7 +188,6 @@
         if (this.agregado=='baseado numa imagem') this.volume.imageRef=this.imagemVolume;
         if (this.agregado=='baseado num volume') this.volume.source_volid=this.volumeVolume;
         let newVolume = { volume : this.volume };
-        console.log(newVolume);
 
         VOLUMES.POST_VOLUME(this.project_id, newVolume).then(r => {
           this.dialogs.newVolume = false;

@@ -49,6 +49,14 @@
             <v-list-tile-title>Volumes</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile :to="{name: 'networks'}">
+          <v-list-tile-action>
+            <v-icon>share</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Networks</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </template>
       </v-list>
     </v-navigation-drawer>

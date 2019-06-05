@@ -4,7 +4,7 @@ export default {
 	letmein(){
 		return axios({
 			method: 'POST',
-			url: 'identity/v3/auth/tokens',
+			url: 'http://localhost:8080/identity/v3/auth/tokens',
 			data: {
 				"auth": {
 					"identity": {

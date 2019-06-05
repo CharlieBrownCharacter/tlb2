@@ -7,8 +7,6 @@ import {store} from './store'
 import Toasted from 'vue-toasted';
 
 
-
-axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.headers['Accept'] = "application/json";
 axios.defaults.headers['Content-Type'] = "application/json";
 
