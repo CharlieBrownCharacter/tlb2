@@ -257,9 +257,6 @@
       },
       ADD_SERVER(){
         let server = JSON.parse(JSON.stringify(this.newServer.server))
-        // if(server.auto){
-        // 	server.networks = [{"uuid": "auto"}]
-        // }else{
         let networks = []
         server.networks.forEach(n => {
           networks.push({

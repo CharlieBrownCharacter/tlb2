@@ -1,7 +1,8 @@
 <template>
-  <section>
-    Whatup
-  </section>
+  <v-container>
+    <h1>What is Openstack?</h1>
+    ...
+  </v-container>
 </template>
 
 <script>
