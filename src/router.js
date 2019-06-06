@@ -7,6 +7,7 @@ import Flavors from './views/Flavors/View'
 import Images from './views/Images/View'
 import Volumes from './views/Volumes/View'
 import Networks from './views/Networks/View'
+import Watch from './views/Watch/View'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/servers/:id',
       name: 'servers-only',
       component: Server
+    },
+    {
+      path: '/watch',
+      name: 'watch',
+      component: Watch
     },
     {
       path: '/flavors',

@@ -17,6 +17,14 @@
         </v-list-tile-content>
       </v-list-tile>
       <template v-if="GET_TOKEN !== null">
+        <v-list-tile :to="{name: 'watch'}">
+          <v-list-tile-action>
+            <v-icon>watch</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Watch - Service</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile :to="{name: 'servers'}">
           <v-list-tile-action>
             <v-icon>computer</v-icon>
