@@ -7,12 +7,16 @@
           :items="networks"
           :loading="loaders.action"
           class="elevation-1"
+          v-if="networks.length >   0"
       >
         <template v-slot:items="props">
-          <td>{{ props.item.name }}</td>          
-          <td>{{ $moment(props.item.created_at).format('D/M/YYYY HH:mm') }}</td>
-          <td>{{ $moment(props.item.updated_at).format('D/M/YYYY HH:mm') }}</td>
-          <td>
+          <td>{{ props.item.name }}</td>
+          <td>{{ getSubnets(props.item.subnets) }}</td>       
+          <td>{{ props.item.status }}</td>       
+          <td>{{ props.item.shared }}</td>          
+          <td>{{ props.item["router:external"] }}</td>       
+          <td>{{ props.item.admin_state_up }}</td>       
+
             <v-menu bottom left>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -79,7 +83,12 @@
     data(){
       return {
 				headers: [
-					{ text: 'Nome', sortable: true, value: 'name' },
+          { text: 'Nome', sortable: true, value: 'name' },
+          { text: 'Subnets', sortable: true, value: 'subnets' },
+          { text: 'Status', sortable: true, value: 'status' },
+          { text: 'Shared', sortable: true, value: 'shared' },
+          { text: 'External', sortable: true, value: 'router:external' },
+          { text: 'Admin', sortable: true, value: 'admin_state_up' },
 				],
         valid: false,
         nameRules: [
@@ -87,6 +96,7 @@
           v => /^[-A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ 1-9]{3,}$/.test(v) || 'Nome invalido'
         ],        
         networks: [],
+        subnets: [],
         network: {
           name: "",
         },
@@ -108,15 +118,15 @@
           this.$toasted.error('Deve inserir a token antes de realizar o pedido')
           return
         }
-
-        console.log("Entrou 2");
         this.loaders.action = true;
         NETWORKS.GET_NETWORKS().then(r => {
           this.networks = r.data.networks;
+          NETWORKS.GET_SUBNETS().then(s => {
+            this.subnets = s.data.subnetpools;
+          })
         }).finally(() => {
           this.loaders.action = false;
         })
-
       },
       POST_NETWORK(){
         NETWORKS.POST_NETWORK(this.network).then(r => {
@@ -139,7 +149,24 @@
           this.loaders.action = false;
           this.GET_VOLUMES();
         })
-      }  
+      },
+      getSubnets(SUBNETS_IDS){
+
+        if ( SUBNETS_IDS.length < 1 || this.subnets.length < 1 ) return;
+
+        let nomeSubnets = [];
+
+        SUBNETS_IDS.forEach(id=> {
+          let registo = this.subnets.find(s => s.id === id);
+          console.log(id);
+          console.log(this.subnets);
+          //nomeSubnets.push(s.name);
+        })
+
+        console.log(nomeSubnets);
+
+        return nomeSubnets.join(",");
+      },
     },
     computed: {
 			...mapGetters({
@@ -150,7 +177,6 @@
       clearInterval(this.timer)
     },
     created() {
-      console.log("Entrou 1");
       this.GET_NETWORKS();
 			// this.timer = setInterval(this.GET_SERVERS_DETAILS, 4000)
     }

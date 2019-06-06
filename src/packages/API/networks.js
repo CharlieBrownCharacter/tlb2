@@ -20,4 +20,10 @@ export default {
 			data: data
 		})
 	},
+	GET_SUBNETS(SUBNET_ID){
+		return axios({
+			method: 'GET',
+			url: 'http://localhost:9696/v2.0/subnetpools',
+		})
+	},
 }

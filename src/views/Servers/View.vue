@@ -91,7 +91,7 @@
                     v-model="newServer.server.networks"
                     :disabled="newServer.server.auto"
                     multiple
-                    item-text="label"
+                    item-text="name"
                     item-value="id"
                     label="Network"
                 ></v-select>
